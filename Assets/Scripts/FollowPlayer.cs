@@ -3,6 +3,7 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     public GameObject cameraRoot;
+    [SerializeField] float cameraStiffness;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,6 +14,6 @@ public class FollowPlayer : MonoBehaviour
     void LateUpdate()
     {
         transform.position = cameraRoot.transform.position;
-        transform.rotation = cameraRoot.transform.rotation;
+        transform.rotation = Quaternion.Slerp(transform.rotation, cameraRoot.transform.rotation, cameraStiffness);
     }
 }
